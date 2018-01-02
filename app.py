@@ -7,37 +7,55 @@ from flask import Flask, request, send_file
 from fsm import TocMachine
 
 
-API_TOKEN = 'Your Telegram API Token'
-WEBHOOK_URL = 'Your Webhook URL'
+API_TOKEN = '535586410:AAHc1x-dOUeBt9c6XugFTzy23REKwazaAd4'
+WEBHOOK_URL = 'https://87377d11.ngrok.io/hook'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
 machine = TocMachine(
     states=[
         'user',
-        'state1',
-        'state2'
+        'greeting',
+        'rank',
+        'player',
+        'showEast',
+        'showWest',
+        'showPlayer',
+        'trap'
     ],
     transitions=[
         {
             'trigger': 'advance',
             'source': 'user',
-            'dest': 'state1',
-            'conditions': 'is_going_to_state1'
+            'dest': 'greeting',
+            'conditions':'is_going_to_greeting'       
         },
+        
         {
             'trigger': 'advance',
-            'source': 'user',
-            'dest': 'state2',
-            'conditions': 'is_going_to_state2'
+            'source': 'greeting',
+            'dest': 'rank',
+            'conditions':'is_going_to_rank'       
         },
+
+        {
+            'trigger': 'advance',
+            'source': 'greeting',
+            'dest': 'player',
+            'conditions':'is_going_to_player'       
+        },
+
+        {
+            'trigger': 'advance',
+            'source': 'greeting',
+            'dest': 'trap',
+            'conditions':'is_going_to_trap'       
+        },
+
         {
             'trigger': 'go_back',
-            'source': [
-                'state1',
-                'state2'
-            ],
-            'dest': 'user'
+            'source': 'trap',
+            'dest': 'greeting'
         }
     ],
     initial='user',
