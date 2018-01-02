@@ -53,6 +53,7 @@ class TocMachine(GraphMachine):
         return text.lower()=='eastern team'
     
     def on_enter_showEast(self, update):
+        update.message.reply_photo(open("img/east.jpg","rb"))
         update.message.reply_text("1.Boston 53W 29L\n2.Cleveland 51W 31L\n3.Toronto 51W 31L\n4.Washington 49W 33L\n5.Atlanta 43W39L\n6.Milwaukee 42W 40L\n7.Indiana 42W 40L\n8.Chicago 41W 41L")    
         self.go_back(update)
 
@@ -61,6 +62,7 @@ class TocMachine(GraphMachine):
         return text.lower()=='western team'
     
     def on_enter_showWest(self, update):
+        update.message.reply_photo(open("img/west.jpg","rb"))
         update.message.reply_text("1.Golden State 67W 15L\n2.San Antonio 61W 21L\n3.Houston 55W 27L\n4.LA 51W 31L\n5.Utah 51W 31L\n6.Oklahoma City 47W 35L\n7.Memphis 43W 39L\n8.Portland 41W 41L\n")    
         self.go_back(update)        
 
@@ -80,6 +82,25 @@ class TocMachine(GraphMachine):
         update.message.reply_text("Wrong Input......")
         self.go_back(update)    
     
+    def is_going_to_trap2(self, update):
+        if self.isTeam(update.message.text)==True:
+            return False
+        else:
+            return True
+    def on_enter_trap2(self, update):
+        update.message.reply_text("Wrong input format you should input Eastern team or Western team")
+        self.go_back(update)    
+        
+
+    def is_going_to_trap3(self, update):
+        if self.isRealPlayer(update.message.text)==True:
+            return False
+        else:
+            return True
+    def on_enter_trap3(self, update):
+        update.message.reply_text("Type wrong name you should type again")
+        self.go_back(update)       
+
 
     def on_exit_state1(self, update):
         print('Leaving state1')

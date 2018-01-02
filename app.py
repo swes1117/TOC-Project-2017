@@ -21,7 +21,9 @@ machine = TocMachine(
         'showEast',
         'showWest',
         'showPlayer',
-        'trap'
+        'trap',
+        'trap2',
+        'trap3'
     ],
     transitions=[
         {
@@ -54,8 +56,8 @@ machine = TocMachine(
         {
             'trigger': 'advance',
             'source': 'player',
-            'dest': 'trap',
-            'conditions':'is_going_to_trap'       
+            'dest': 'trap3',
+            'conditions':'is_going_to_trap3'       
         },
         {
             'trigger': 'advance',
@@ -79,8 +81,8 @@ machine = TocMachine(
         {
             'trigger': 'advance',
             'source': 'rank',
-            'dest': 'trap',
-            'conditions':'is_going_to_trap'       
+            'dest': 'trap2',
+            'conditions':'is_going_to_trap2'       
         },
 
         {
@@ -92,6 +94,16 @@ machine = TocMachine(
                 'showPlayer'
             ],
             'dest': 'greeting'
+        },
+        {
+            'trigger': 'go_back',
+            'source': 'trap2',
+            'dest': 'rank'
+        },
+        {
+            'trigger': 'go_back',
+            'source': 'trap3',
+            'dest': 'player'
         }
     ],
     initial='user',
