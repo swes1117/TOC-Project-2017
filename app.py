@@ -8,7 +8,7 @@ from fsm import TocMachine
 
 
 API_TOKEN = '535586410:AAHc1x-dOUeBt9c6XugFTzy23REKwazaAd4'
-WEBHOOK_URL = 'https://87377d11.ngrok.io/hook'
+WEBHOOK_URL = 'https://c2019be6.ngrok.io/hook'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
@@ -47,14 +47,50 @@ machine = TocMachine(
 
         {
             'trigger': 'advance',
+            'source': 'player',
+            'dest': 'showPlayer',
+            'conditions':'is_going_to_showPlayer'       
+        },
+        {
+            'trigger': 'advance',
+            'source': 'player',
+            'dest': 'trap',
+            'conditions':'is_going_to_trap'       
+        },
+        {
+            'trigger': 'advance',
             'source': 'greeting',
             'dest': 'trap',
             'conditions':'is_going_to_trap'       
         },
 
         {
+            'trigger': 'advance',
+            'source': 'rank',
+            'dest': 'showWest',
+            'conditions':'is_going_to_showWest'       
+        },
+        {
+            'trigger': 'advance',
+            'source': 'rank',
+            'dest': 'showEast',
+            'conditions':'is_going_to_showEast'       
+        },
+        {
+            'trigger': 'advance',
+            'source': 'rank',
+            'dest': 'trap',
+            'conditions':'is_going_to_trap'       
+        },
+
+        {
             'trigger': 'go_back',
-            'source': 'trap',
+            'source': [
+                'trap',
+                'showEast',
+                'showWest',
+                'showPlayer'
+            ],
             'dest': 'greeting'
         }
     ],
