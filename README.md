@@ -1,39 +1,20 @@
-# TOC Project 2017
+# TOC Project 2017 
 
-Template Code for TOC Project 2017
+### Name : 謝明軒
+### ID : F74042183
 
+### Function ： A bot which can show nba standing and famous player data
 A telegram bot based on a finite state machine
 
-## Setup
-
-### Prerequisite
-* Python 3
-
-#### Install Dependency
-```sh
-pip install -r requirements.txt
-```
-
-* pygraphviz (For visualizing Finite State Machine)
-    * [Setup pygraphviz on Ubuntu](http://www.jianshu.com/p/a3da7ecc5303)
-
-### Secret Data
-
-`API_TOKEN` and `WEBHOOK_URL` in app.py **MUST** be set to proper values.
-Otherwise, you might not be able to run your code.
 
 ### Run Locally
-You can either setup https server or using `ngrok` as a proxy.
+Using `ngrok` as a proxy.
 
 **`ngrok` would be used in the following instruction**
 
 ```sh
 ngrok http 5000
 ```
-
-After that, `ngrok` would generate a https URL.
-
-You should set `WEBHOOK_URL` (in app.py) to `your-https-URL/hook`.
 
 #### Run the sever
 
@@ -42,20 +23,24 @@ python3 app.py
 ```
 
 ## Finite State Machine
-![fsm](./img/show-fsm.png)
+![](https://i.imgur.com/EjQsaGV.png)
+
+## 10 state
+### 01.user (intial state)
+### 02.gretting (say hello and some info)
+### 03.rank (ask you which nba standing you want to see east or west)
+### 04.player (ask which player you want to see)
+### 05.trap (wrong input when you are in greeting state go back to greeting)
+### 06.showEast (show you nba east standing and go back to greeting state)
+### 07.showWest (show you nba west standing and go back to greeting state)
+### 08.trap2 (wrong input when you are in rank state go back to rank state)
+### 09.showPlayer (show you specific player data and go back  greeting state)
+### 10.trap3 (wrong input when you are in player go back to player state)
 
 ## Usage
-The initial state is set to `user`.
-
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
+The initial state user no matter what you input you will enter greeting state and you have two option to choose show player or show nba standing and this state maching has memory machanism 
 
 * user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
-
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
-
-
+	* Just follow the respond bot tell you 
 ## Author
-[Lee-W](https://github.com/Lee-W)
+[Tim](https://github.com/swes1117)
